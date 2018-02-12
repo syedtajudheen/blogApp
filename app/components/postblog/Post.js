@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {View,Text,TextInput,Button,StyleSheet} from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
 class Post extends React.Component{
     constructor(props){
@@ -9,6 +9,7 @@ class Post extends React.Component{
             'title': '',
             'body': ''
         }
+        this.onsubmit=this.onsubmit.bind(this);
     }
  
     onsubmit(){
@@ -25,6 +26,7 @@ class Post extends React.Component{
                 body: this.state.body
             })
           })
+          .then(response => Alert.alert('Sucessfully Posted!') )
          
     }
     static navigationOptions={
