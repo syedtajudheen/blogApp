@@ -1,5 +1,7 @@
 import React,{Component} from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { postblog  } from '../../action/action'
+import { connect } from 'react-redux'
 
 class Post extends React.Component{
     constructor(props){
@@ -13,21 +15,12 @@ class Post extends React.Component{
     }
  
     onsubmit(){
-        
-        fetch('https://jsonprovider.herokuapp.com/posts/', {  
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                userId: this.state.userId,
-                title: this.state.title,
-                body: this.state.body
-            })
-          })
-          .then(response => Alert.alert('Sucessfully Posted!') )
-         
+        const finaldata = {
+            userId: this.state.userId,
+            title: this.state.title,
+            body: this.state.body
+        }
+        this.props.dispatch(postblog(finaldata))
     }
     static navigationOptions={
         title:'Post Blog'
@@ -56,4 +49,4 @@ const styles=StyleSheet.create({
         marginBottom:20,
     }
 })
-export default Post
+export default connect()(Post)

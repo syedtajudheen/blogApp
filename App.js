@@ -4,15 +4,22 @@ import Home from './app/components/home/Home'
 import Post from './app/components/postblog/Post'
 import { StackNavigator } from 'react-navigation';
 
+import { Provider } from 'react-redux';
+import configureStore from './app/store/configureStore';
+
+const store = configureStore();
+
 const Navigation = StackNavigator ({
   Home: {screen: Home},
   Post: {screen: Post}
 })
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
-      <Navigation/>
+      <Provider store={store}>
+        <Navigation/>
+      </Provider>
     );
   }
 }
@@ -28,3 +35,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default App
